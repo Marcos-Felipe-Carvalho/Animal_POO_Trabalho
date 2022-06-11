@@ -3,14 +3,15 @@ package pacote1;
 import java.util.Scanner;
 
 public class TestaAnimal {
+	static Scanner entrada = new Scanner(System.in); // Variável para obter as informações do teclado
 
 	public static void main(String[] args) {
+		/* Variáveis */
 		boolean sair = false;
 		int opcao, evergaduraAsa, nrDentes;
 		String nome, especie, cor;
 
-		Scanner entrada = new Scanner(System.in);
-
+		/* Menu de opções */
 		while (sair != true) {
 			System.out.println("***** TRABALHO POO - ANIMAL *****");
 			System.out.println("1) Incluir arara");
@@ -20,26 +21,19 @@ public class TestaAnimal {
 			System.out.println("5) Listar animais");
 			System.out.println("6) Sair");
 
-
 			System.out.println("Selecione uma opção(número):");
 			opcao = entrada.nextInt();
 			switch (opcao) {
 			case 1:
 				System.out.println(" --- Nova arara: --- ");
 
-				System.out.println("Digite o nome da arara:");
-				nome = entrada.next();
+				nome = obtemNome("arara");
 
-				System.out.println("Digite a especie da arara:");
-				especie = entrada.next();
+				especie = obtemEspecie("arara");
 
 				Arara arara = new Arara(nome, especie);
 
-				while (arara.getCor() == "") {
-					System.out.println("Digite a cor da arara:");
-					cor = entrada.next();
-					arara.setCor(cor);
-				}
+				defineCor("arara", arara);
 
 				System.out.println("Digite a envergadura da asa da arara:");
 				evergaduraAsa = entrada.nextInt();
@@ -50,19 +44,13 @@ public class TestaAnimal {
 			case 2:
 				System.out.println(" --- Novo jacaré: --- ");
 
-				System.out.println("Digite o nome do jacaré:");
-				nome = entrada.next();
+				nome = obtemNome("jacaré");
 
-				System.out.println("Digite a especie do jacaré:");
-				especie = entrada.next();
+				especie = obtemEspecie("jacaré");
 
 				Jacare jacare = new Jacare(nome, especie);
 
-				while (jacare.getCor() == "") {
-					System.out.println("Digite a cor do jacaré:");
-					cor = entrada.next();
-					jacare.setCor(cor);
-				}
+				defineCor("jacaré", jacare);
 
 				System.out.println("Digite a quantidade de dentes do jacaré:");
 				nrDentes = entrada.nextInt();
@@ -72,19 +60,13 @@ public class TestaAnimal {
 			case 3:
 				System.out.println(" --- Novo lagarto: --- ");
 
-				System.out.println("Digite o nome do lagarto:");
-				nome = entrada.next();
+				nome = obtemNome("lagarto");
 
-				System.out.println("Digite a especie do lagarto:");
-				especie = entrada.next();
+				especie = obtemEspecie("lagarto");
 
 				Lagarto lagarto = new Lagarto(nome, especie);
 
-				while (lagarto.getCor() == "") {
-					System.out.println("Digite a cor do lagarto:");
-					cor = entrada.next();
-					lagarto.setCor(cor);
-				}
+				defineCor("lagarto", lagarto);
 
 				System.out.println("Digite a quantidade de dentes do lagarto:");
 				nrDentes = entrada.nextInt();
@@ -107,6 +89,24 @@ public class TestaAnimal {
 			}
 
 		}
+
 	}
 
+	/* Métodos para obter informações comum dos animais */
+	public static String obtemNome(String animal) {
+		System.out.println("Digite o nome do(a) " + animal + ":");
+		return entrada.next();
+	}
+
+	public static String obtemEspecie(String animal) {
+		System.out.println("Digite a espécie do(a) " + animal + ":");
+		return entrada.next();
+	}
+
+	public static void defineCor(String animal, Animal tipoAnimal) {
+		while (tipoAnimal.getCor() == "") {
+			System.out.println("Digite a cor da arara:");
+			tipoAnimal.setCor(entrada.next());
+		}
+	}
 }
